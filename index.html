@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" href="static/style.css" />
+    <script src="static/MemonizationSample.js"></script>
+  </head>
+
+  <body>
+    <h1>Memonization demo</h1>
+    <div id="main"></div>
+  </body>
+  <script>
+    document.getElementsByTagName('h1')[0].style.fontSize = '6vw';
+
+    document.addEventListener('DOMContentLoaded', function (event) {
+      /*for (let i = 10; i > 0; i--) {
+        measureTime(getElementsMemorized, "img");
+        }*/
+
+      for (let i = 10; i > 0; i--) {
+        measureTime(
+          studentWhoseTeacherIsHighestPaidMemorized,
+          students,
+          teachers
+        );
+      }
+    });
+  </script>
+</html>

@@ -1,25 +1,21 @@
-//best academic definition
-//https://addyosmani.com/blog/faster-javascript-memoization/
-//real good sample
-//https://medium.com/@kevinkoehler/practical-memoization-in-javascript-20a02887314e
-//best implementations
-//https://medium.com/dottech/comprendiendo-la-memoization-en-javascript-typescript-83dd851b54f4
-
+//custom Memonize implementation
 const memoize = fn => {
-    const cache = {}; // 1
-    return (...args) => { // 2
-        const stringifiedArgs = JSON.stringify(args); // 3
+    const cache = {}; 
+    return (...args) => { 
+        const stringifiedArgs = JSON.stringify(args); 
         const result = (cache[stringifiedArgs] =
             typeof cache[stringifiedArgs] === 'undefined'
                 ? fn(...args)
-                : cache[stringifiedArgs]); // 4
-        return result; // 5
+                : cache[stringifiedArgs]); 
+        return result; 
     };
 };
 
+//the data
 const students = [{ name: "Fred", teacher: "Steve" }, { name: "Chris", teacher: "Bob" }, { name: "Juan", teacher: "Oscar" }, { name: "Maria", teacher: "Carlos" }]
 const teachers = [{ name: "Steve", salary: 50000 }, { name: "Bob", salary: 60000 }, { name: "Oscar", salary: 70000 }, { name: "Carlos", salary: 80000 }]
 
+//find students with the richest teacher
 const studentWhoseTeacherIsHighestPaid = (students, teachers) => {
     const maxStudentTeacherCombo = {
         student: students[0],
@@ -36,26 +32,30 @@ const studentWhoseTeacherIsHighestPaid = (students, teachers) => {
     return maxStudentTeacherCombo.student;
 }
 
+//get elements of current page
 const getElements = selector => {
     let r = document.querySelectorAll(selector || '0'), length = r.length;
     return (length == 1) ? r[0] : r;
 };
 
+//mesure execution time of a function with N arguments
 const measureTime = (cb, ...args) => {
     const t0 = performance.now();
     var result = cb(...args);
     console.log(result)
     const t1 = performance.now();
-    console.log('Call to doSomething took ' + (t1 - t0) + ' milliseconds.');
+    addItem('Call the function took ' + (t1 - t0) + ' milliseconds.');
 };
 
+//declare memorized functions
 const getElementsMemorized = memoize(getElements); // Decorator Pattern
 const studentWhoseTeacherIsHighestPaidMemorized = memoize(studentWhoseTeacherIsHighestPaid); // Decorator Pattern
 
-for (let i = 10; i > 0; i--) {
-    measureTime(getElementsMemorized, "img");
-}
-
-for (let i = 10; i > 0; i--) {
-    measureTime(studentWhoseTeacherIsHighestPaidMemorized, students, teachers);
-}
+//add item into the main div
+const addItem = (message) => {
+    console.log(message);
+    var target = document.querySelector('#main');
+    var msg = document.createElement('div');
+    msg.innerHTML = message;
+    target.parentNode.insertBefore(msg, target);
+};
