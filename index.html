@@ -3,7 +3,8 @@
 <html>
   <head>
     <link rel="stylesheet" href="static/style.css" />
-    <script src="static/MemonizationSample.js"></script>
+    <script src="static/MemoizationSample.js"></script>
+    <script src="static/Memoization2.js"></script>
   </head>
 
   <body>
@@ -25,6 +26,14 @@
           teachers
         );
       }
+      addItem("------------------------");
+      for (let i = 10; i > 0; i--) {
+        measureTime(
+            studentWhoseTeacherIsHighestPaidMemoizedNewApproach,
+            students,
+            teachers
+            );
+       }
     });
   </script>
 </html>
